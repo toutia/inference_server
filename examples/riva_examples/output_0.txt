@@ -1,0 +1,52 @@
+>>>Time 1728058686.56s: hello
+>>>Time 1728058686.60s: hello
+>>>Time 1728058686.66s: hello
+>>>Time 1728058686.71s: hello
+>>>Time 1728058686.75s: he
+>>>Time 1728058686.81s: hello this is
+>>>Time 1728058686.85s: hello this is
+>>>Time 1728058686.91s: hello this is an
+>>>Time 1728058686.95s: hello this is an example
+>>>Time 1728058687.00s: hello this is an example
+>>>Time 1728058687.06s: hello this is an example
+>>>Time 1728058687.10s: this is an example
+>>>Time 1728058687.16s: this is an example
+>>>Time 1728058687.21s: this is an example
+>>>Time 1728058687.26s: this is an example
+Time 1.21s: Transcript 0: hello this is an example 
+>>>Time 1728058687.40s: like
+>>>Time 1728058687.45s: like
+>>>Time 1728058687.51s: would like to
+>>>Time 1728058687.55s: would like to
+>>>Time 1728058687.60s: would like to know
+>>>Time 1728058687.66s: would like to know
+>>>Time 1728058687.70s: would like to know
+>>>Time 1728058687.76s: would like to know what
+>>>Time 1728058687.79s: would like to know what
+>>>Time 1728058687.83s: would like to know what we are
+>>>Time 1728058687.90s: like to know what we are
+>>>Time 1728058687.95s: like to know what we are
+>>>Time 1728058688.01s: like to know what we are
+>>>Time 1728058688.05s: would like to know what we are
+>>>Time 1728058688.11s: would like to know what we are saying
+>>>Time 1728058688.15s: would like to know what we are saying
+>>>Time 1728058688.20s: would like to know what we are saying
+>>>Time 1728058688.26s: would like to know what we are saying
+>>>Time 1728058688.30s: would like to know what we are saying
+>>>Time 1728058688.36s: would like to know what we are saying
+>>>Time 1728058688.41s: would like to know what we are saying exactly
+>>>Time 1728058688.43s: would like to know what we are saying exactly
+>>>Time 1728058688.50s: would like to know what we saying exactly
+>>>Time 1728058688.54s: would like to know what we are saying exactly
+>>>Time 1728058688.61s: would like to know what we are saying exactly
+>>>Time 1728058688.65s: would like to know what we are saying exactly
+>>>Time 1728058688.70s: would like to know what we are saying exactly
+Time 2.65s: Transcript 0: would like to know what we are saying exactly 
+>>>Time 1728058688.93s: we will
+>>>Time 1728058688.99s: we will
+>>>Time 1728058689.03s: we will use
+>>>Time 1728058689.09s: we will use
+>>>Time 1728058689.14s: we will use
+>>>Time 1728058689.20s: we will use
+>>>Time 1728058689.25s: we will use
+Time 3.19s: Transcript 0: we will use rave 

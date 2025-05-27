@@ -1,0 +1,12 @@
+.venv_tm/
+__pycache__/
+*.py[cod]
+*$py.class
+personal_key.txt
+.venv
+model_repository
+
+# ignore xttsv2 .pth files 
+*.pth
+# Ignore the entire 'model_repository' folder
+model_repository/

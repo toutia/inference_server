@@ -1,0 +1,18 @@
+[Unit]
+Description=Riva Speech Services
+After=docker.service
+Wants=docker.service
+
+[Service]
+ExecStart=bash /home/touti/dev/triton_manager/riva_start.sh 
+WorkingDirectory=/home/touti/dev/triton_manager/
+User=touti
+Restart=on-failure
+
+# Logging settings (overwrite log file on each start)
+StandardOutput=truncate:/home/touti/dev/triton_manager/triton_manager.log
+StandardError=truncate:/home/touti/dev/triton_manager/triton_manager.log
+
+
+[Install]
+WantedBy=multi-user.target
