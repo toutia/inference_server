@@ -9,4 +9,6 @@ model_repository
 # ignore xttsv2 .pth files 
 *.pth
 # Ignore the entire 'model_repository' folder
-model_repository/
+model_repository/models/*
+model_repository/prebuilt
+model_repository/rmir
