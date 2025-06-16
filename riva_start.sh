@@ -103,6 +103,7 @@ if [ $(docker ps -q -f "name=^/$riva_daemon_speech$" | wc -l) -eq 0 ]; then
         -e "RIVA_API_NGC_ORG=$RIVA_API_NGC_ORG" \
         -e "RIVA_EULA=$RIVA_EULA" \
         -v $riva_model_loc:/data \
+        -v /home/touti/dev/inference_manager/needed:/needed \
         $ssl_vol_args \
         --ulimit memlock=-1 --ulimit stack=67108864 \
         --name $riva_daemon_speech $docker_run_args \
