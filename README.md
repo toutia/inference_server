@@ -1,90 +1,92 @@
 
-https://docs.nvidia.com/deeplearning/riva/user-guide/docs/asr/asr-overview.html
+# inference_server
 
-################################ to solve  bad apikey error ################################"
-before running the riva init :
+**inference_server** est un serveur d'inférence basé sur NVIDIA Riva, conçu pour déployer des modèles de reconnaissance vocale et de synthèse vocale dans des environnements de production. Ce projet facilite l'intégration de services d'IA vocale via des scripts d'initialisation, de démarrage et d'arrêt, ainsi que des configurations système.
 
-ngc download should work in the host :
+## Structure du dépôt
 
-# install ngc  cli : https://org.ngc.nvidia.com/setup/installers/cli
+- **`protos/`** : Définitions de services et messages en Protobuf pour la communication avec les services Riva.
+- **`systemd/`** : Scripts pour l'intégration avec `systemd`, permettant de gérer le serveur comme un service système.
+- **`xttsv2/`** : Implémentation du service de synthèse vocale (Text-to-Speech) version 2.
+- **`examples/`** : Exemples d'utilisation du serveur d'inférence avec des clients.
+- **`config.sh`** : Script de configuration pour l'installation et la mise en place de l'environnement.
+- **`riva_init.sh`** : Script d'initialisation pour télécharger et configurer les modèles Riva.
+- **`riva_start.sh`** : Script pour démarrer le serveur d'inférence.
+- **`riva_stop.sh`** : Script pour arrêter le serveur d'inférence.
+- **`requirements.txt`** : Liste des dépendances Python nécessaires au fonctionnement du serveur.
+- **`status.md`** : État actuel du projet et des fonctionnalités implémentées.
 
-version 3.50 
+## Prérequis
 
+- NVIDIA GPU compatible avec CUDA.
+- NVIDIA Riva SDK installé.
+- Accès à [NGC CLI](https://org.ngc.nvidia.com/setup/installers/cli) pour télécharger les modèles Riva.
+- Python 3.7 ou supérieur.
 
-modify in the script 3.26=> 3.50
+## Installation
 
-#################################### about model_repository ###################################
+1. Clonez le dépôt :
 
+   ```bash
+   git clone https://github.com/toutia/inference_server.git
+   cd inference_server
+   ```
 
-it contains models for riva generated using riva init 
-it can also contain new modedls destined exclusively for triton server 
+2. Installez les dépendances Python :
 
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-riva-start   deploys the models to triton and configures its services (ports , service cascading ...)
+3. Configurez l'environnement :
 
+   ```bash
+   source config.sh
+   ```
 
+4. Initialisez les modèles Riva :
 
+   ```bash
+   ./riva_init.sh
+   ```
 
-##########################################"DOCKER PERMISSION EROR ####################################
+   *Remarque : Assurez-vous que la version de NGC CLI dans le script correspond à la version installée sur votre système.*
 
+## Utilisation
 
-sudo usermod -aG docker $USER
+- Démarrer le serveur d'inférence :
 
-newgrp docker
-groups $USER
+  ```bash
+  ./riva_start.sh
+  ```
 
-cat /etc/docker/daemon.json
-##################################### IF ONLY ruuning riva_start #################################
+- Arrêter le serveur d'inférence :
 
-=>  login docker with key from nvidia 
+  ```bash
+  ./riva_stop.sh
+  ```
 
-if riva init +> also ngc ...
+- Vérifier l'état du serveur :
 
-https://ngc.nvidia.com/
-  +>  setup +> generate personal     key 
+  ```bash
+  ./riva_status.sh
+  ```
 
+## Intégration avec systemd
 
+Des scripts `systemd` sont fournis pour gérer le serveur comme un service système. Placez les fichiers dans le répertoire approprié et activez le service :
 
-#######################" getting large files = models ################################""
-sudo apt-get install git-lfs
+```bash
+sudo cp systemd/riva_inference_server.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable riva_inference_server
+sudo systemctl start riva_inference_server
+```
 
+## Contribution
 
-################################"" tensorrt and cv2   install #############################################"
+Les contributions sont les bienvenues. Merci de suivre les bonnes pratiques de pull request et de documentation.
 
-copy from system 
+## Licence
 
-touti@ubuntu:~/dev/triton_manager$  python -c "import cv2 ; print(cv2.__file__)"
-/usr/lib/python3.10/dist-packages/cv2/__init__.py
-touti@ubuntu:~/dev/triton_manager$ cp -r  /usr/lib/python3.10/dist-packages/cv2   .venv-tm/lib
-lib/   lib64/ 
-touti@ubuntu:~/dev/triton_manager$ cp -r  /usr/lib/python3.10/dist-packages/cv2   .venv-tm/lib/python3.10/site-packages/
-
-
-
-
-#########################################  export yolo to tensorrt ########################################
-
-the deployment on triton inference server  works Now :
-* the ultra exporter includes metadata in the beginning when writing the engine file 
-
-* modified that behaviour by commeenting  line of code 812-816 ultra/engine/exporter.py 
-
-* idea : save metradata to a file when exporting 
-
-* when calling the model from triton or tensorrt => autobackend is called 
-
-add  
-
-            metadata={
-
-                        "task": "detect",
-                        "names":{0: 'person', 1: 'bicycle', 2: 'car', 3: 'motorcycle', 4: 'airplane', 5: 'bus', 6: 'train', 7: 'truck', 8: 'boat', 9: 'traffic light', 10: 'fire hydrant', 11: 'stop sign', 12: 'parking meter', 13: 'bench', 14: 'bird', 15: 'cat', 16: 'dog', 17: 'horse', 18: 'sheep', 19: 'cow', 20: 'elephant', 21: 'bear', 22: 'zebra', 23: 'giraffe', 24: 'backpack', 25: 'umbrella', 26: 'handbag', 27: 'tie', 28: 'suitcase', 29: 'frisbee', 30: 'skis', 31: 'snowboard', 32: 'sports ball', 33: 'kite', 34: 'baseball bat', 35: 'baseball glove', 36: 'skateboard', 37: 'surfboard', 38: 'tennis racket', 39: 'bottle', 40: 'wine glass', 41: 'cup', 42: 'fork', 43: 'knife', 44: 'spoon', 45: 'bowl', 46: 'banana', 47: 'apple', 48: 'sandwich', 49: 'orange', 50: 'broccoli', 51: 'carrot', 52: 'hot dog', 53: 'pizza', 54: 'donut', 55: 'cake', 56: 'chair', 57: 'couch', 58: 'potted plant', 59: 'bed', 60: 'dining table', 61: 'toilet', 62: 'tv', 63: 'laptop', 64: 'mouse', 65: 'remote', 66: 'keyboard', 67: 'cell phone', 68: 'microwave', 69: 'oven', 70: 'toaster', 71: 'sink', 72: 'refrigerator', 73: 'book', 74: 'clock', 75: 'vase', 76: 'scissors', 77: 'teddy bear', 78: 'hair drier', 79: 'toothbrush'},
-                        "stride": 1,
-                        "task": "detect",
-                        "batch": 1,
-                        "imgsz": 640,
-            }
-
- ot laod it from file 
-
- in line 411  ultra/nn/autobackend.py
+Ce projet est sous licence [Apache-2.0](https://opensource.org/licenses/Apache-2.0).
